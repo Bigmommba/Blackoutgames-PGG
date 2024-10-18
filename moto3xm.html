@@ -1,126 +1,100 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
   <head>
+     <script async src="https://arc.io/widget.min.js#5XPTU21J"><script data-goatcounter="https://parcoil.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script></script><script src="maintenance.js/"></script><script>
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W8NZMM8WN9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W8NZMM8WN9');
+</script><link rel="manifest" href="manifest.json">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Native">
+<meta name="apple-mobile-web-app-title" content="Native">
+<meta name="theme-color" content="#0275d8">
+<meta name="msapplication-navbutton-color" content="#0275d8">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-starturl" content="/">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" type="image/png" sizes="195x253" href="images/native.png">
+<link rel="apple-touch-icon" type="image/png" sizes="195x253" href="images/native.png">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8831680677027134"
+	<script async src="https://arc.io/widget.min.js#5XPTU21J"><script data-goatcounter="https://parcoil.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script></script><script src="maintenance.js/"></script><script>
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+</script>
+<script> if(top!=self){
+    top.location.replace(document.location);
+    window.open('https://840p.ml','_blank');window.setTimeout(function(){this.close();},1000);
+    alert("STOP STEALING GAMES FROM 840P.ML.")
+} </script>
+
+<script type="text/javascript">
+if ( window.self !== window.top ) {
+    window.top.location.href=window.location.href;
+}
+</script>
+<script> var iframes = document.getElementsByTagName('iframe');
+
+for (var i = 0; i < iframes.length; i++) {
+  var iframe = iframes[i];
+
+  try {
+    // Try to access the contentWindow property
+    var iframeWindow = iframe.contentWindow;
+
+    // If we can access the contentWindow property, block the iframe
+     window.open('https://840p.ml','_blank');window.setTimeout(function(){this.close();},1000);
+  } catch (e) {
+    // If we can't access the contentWindow property, the iframe is from a different origin and cannot be blocked
+  }
+}
+</script>
+
+<script> if (window.self !== window.top) {
+  // This page is being displayed in an iframe
+  window.top.location.href = window.location.href;
+} </script>
+<script>
+if( top != self )
+    delete top.onbeforeunload;
+</script>
+<script>
+var iframes = document.getElementsByTagName('iframe');
+
+for (var i = 0; i < iframes.length; i++) {
+  var iframe = iframes[i];
+
+  // Set the sandbox attribute to 'allow-scripts'
+  iframe.sandbox = 'allow-scripts';
+}
+</script>
+<meta http-equiv="X-Frame-Options" content="deny">
+     crossorigin="anonymous"></script>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
-    <title>Drift Hunters</title>
-    <meta
-      name="description"
-      content="Drift Hunters is an online 3D car drifting game. Race on multiple challenging racetracks and customize your cars."
-    />
-    <script src="/js/all.js"></script>
-
-    <meta name="robots" content="noindex,nofollow" />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      .webgl-content * {
-        border: 0;
-        margin: 0;
-        padding: 0;
-      }
-      .webgl-content {
-        position: absolute;
-      }
-      .webgl-content,
-      #gameContainer,
-      #unityContainer,
-      canvas {
-        width: 100% !important;
-        height: 100% !important;
-      }
-      .webgl-content .logo,
-      .progress {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      }
-      .webgl-content .logo {
-        background: url("progressLogo.Light.png") no-repeat center/contain;
-        width: 354px;
-        height: 130px;
-      }
-      .webgl-content .progress {
-        height: 18px;
-        width: 141px;
-        margin-top: 90px;
-      }
-      .webgl-content .progress .empty {
-        background: url("progressEmpty.Light.png") no-repeat right/cover;
-        float: right;
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-      }
-      .webgl-content .progress .full {
-        background: url("progressFull.Light.png") no-repeat left/cover;
-        float: left;
-        width: 0%;
-        height: 100%;
-        display: inline-block;
-      }
-      .webgl-content .logo.Dark {
-        background-image: url(progressLogo.Dark.png);
-      }
-      .webgl-content .progress.Dark .empty {
-        background-image: url(progressEmpty.Dark.png);
-      }
-      .webgl-content .progress.Dark .full {
-        background-image: url(progressFull.Dark.png);
-      }
-      .webgl-content .footer {
-        margin-top: 5px;
-        height: 38px;
-        line-height: 38px;
-        font-family: Helvetica, Verdana, Arial, sans-serif;
-        font-size: 18px;
-      }
-      .webgl-content .footer .webgl-logo,
-      .title,
-      .fullscreen {
-        height: 100%;
-        display: inline-block;
-        background: transparent center no-repeat;
-      }
-      .webgl-content .footer .webgl-logo {
-        background-image: url(webgl-logo.png);
-        width: 204px;
-        float: left;
-      }
-      .webgl-content .footer .title {
-        margin-right: 10px;
-        float: right;
-      }
-      .webgl-content .footer .fullscreen {
-        background-image: url(fullscreen.png);
-        width: 38px;
-        float: right;
-      }
-    </style>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css" />    
   </head>
-  <body style="margin: 0 auto; overflow: hidden">
-    <div class="webgl-content">
-      <div
-        id="gameContainer"
-        style="width: 100%; height: 100%; margin: 0"
-      ></div>
-    </div>
+  <body>
+    <script type="text/javascript" src="assets/box2dweb/nape.min.js">
+      var nape = "nape.min.js";
+    </script>
+    <script type="text/javascript" src="motox3m.min.js"></script>
   </body>
-  <script src="UnityLoader2019.js"></script>
-  <script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "dh.json");
-
-    function UnityProgress(gameInstance, progress) {
-      if (!gameInstance.Module) {
-        return;
-      }
-    }
-  </script>
 </html>
