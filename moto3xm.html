@@ -6,55 +6,39 @@
     <base target="_blank">
     <script src="https://www.authpro.com/js/auth.js"></script>
     <style>
-        body, html {
-            margin: 0; /* Remove default margin */
-            height: 100%; /* Full height */
-            overflow: hidden; /* Prevent scrolling */
-            display: flex; /* Use flexbox for centering */
-            flex-direction: column; /* Stack elements vertically */
-            align-items: center; /* Center horizontally */
-            justify-content: center; /* Center vertically */
-        }
-        #fr {
-            width: 90%; /* Set a larger width for the iframe container */
-            height: 80%; /* Set a larger height */
-            position: relative; /* Positioning for child elements */
-            overflow: hidden; /* Hide overflow */
-        }
-        iframe {
-            width: 100%; /* Full width of parent div */
-            height: 100%; /* Full height of parent div */
-            border: none; /* Remove default border */
-        }
         .c-button {
-            position: absolute; /* Position button absolutely */
-            bottom: 20px; /* Space from the bottom */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Adjust for centering */
+            min-width: 100%;
             font-family: fantasy;
-            font-size: 30px;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
             background: #274e13;
             color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px; /* Add some padding */
+            font-size: 30px;
             cursor: pointer;
-            z-index: 1; /* Ensure button is above the iframe */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
         .c-button:hover {
             background: #6aa84f;
         }
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
     </style>
 </head>
 <body>
-    <div id="fr" data='<iframe src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" allowfullscreen></iframe>'>
-        <iframe src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" allowfullscreen></iframe>
+    <div id="fr" data='<iframe width="100%" height="100%" src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" frameborder="0" allowfullscreen></iframe>'>
+        <iframe width="100%" height="100%" src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" frameborder="0" allowfullscreen></iframe>
     </div>
     <button class="c-button" type="button" onclick="PlayTo(this)" style="display: none;">Play on Classroom 6X</button>
 
     <script>
         function PlayTo(sel) {
-            var div = sel.previousElementSibling;
+            var div = sel.previousElementSibling; // Use previousElementSibling for better accuracy
             div.innerHTML = div.getAttribute('data');
             sel.style.display = "none";
         }
