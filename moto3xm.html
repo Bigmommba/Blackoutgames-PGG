@@ -10,14 +10,21 @@
             margin: 0; /* Remove default margin */
             height: 100%; /* Full height */
             overflow: hidden; /* Prevent scrolling */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
         }
         #fr {
-            width: 100vw; /* Full width of the viewport */
-            height: calc(100vh  ); /* Full height 
+            width: 80%; /* Set width for the iframe container */
+            height: calc(100vh); /* Full height minus space for button */
             position: relative; /* Positioning for child elements */
+            display: flex; /* Flexbox for centering iframe */
+            justify-content: center; /* Center iframe horizontally */
+            overflow: hidden; /* Hide overflow */
         }
         iframe {
-            width: 80%; /* Full width of parent div */
+            width: 100%; /* Full width of parent div */
             height: 100%; /* Full height of parent div */
             border: none; /* Remove default border */
         }
