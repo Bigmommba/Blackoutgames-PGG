@@ -11,41 +11,32 @@
             height: 100%; /* Full height */
             overflow: hidden; /* Prevent scrolling */
         }
-        .c-button {
-            min-width: 100%;
-            font-family: fantasy;
-            appearance: auto;
-            border: 0;
-            border-radius: 5px;
-            background: #274e13;
-            color: #fff;
-            font-size: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50px; /* Fixed height for button */
-            position: absolute; /* Position button above iframe */
-            bottom: 20px; /* Space from the bottom */
-            left: 0;
-        }
-        .c-button:hover {
-            background: #6aa84f;
-        }
-        .c-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 4px #cbd6ee;
-        }
         #fr {
             width: 100vw; /* Full width of the viewport */
-            height: calc(100vh - 70px); /* Full height minus button height */
-            overflow: hidden; /* Hide overflow */
+            height: 100vh; /* Full height of the viewport */
             position: relative; /* Positioning for child elements */
         }
         iframe {
             width: 100%; /* Full width of parent div */
             height: 100%; /* Full height of parent div */
             border: none; /* Remove default border */
+        }
+        .c-button {
+            position: absolute; /* Position button absolutely */
+            bottom: 20px; /* Space from the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for centering */
+            font-family: fantasy;
+            font-size: 30px;
+            background: #274e13;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px; /* Add some padding */
+            cursor: pointer;
+        }
+        .c-button:hover {
+            background: #6aa84f;
         }
     </style>
 </head>
