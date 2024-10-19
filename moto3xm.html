@@ -13,7 +13,7 @@
         }
         #fr {
             width: 100vw; /* Full width of the viewport */
-            height: 100vh; /* Full height of the viewport */
+            height: calc(100vh - 70px); /* Full height minus button height */
             position: relative; /* Positioning for child elements */
         }
         iframe {
@@ -34,6 +34,7 @@
             border-radius: 5px;
             padding: 10px 20px; /* Add some padding */
             cursor: pointer;
+            z-index: 1; /* Ensure button is above the iframe */
         }
         .c-button:hover {
             background: #6aa84f;
