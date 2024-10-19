@@ -28,17 +28,28 @@
             outline: none;
             box-shadow: 0 0 0 4px #cbd6ee;
         }
+        #fr {
+            width: 800px; /* Set desired width */
+            height: 600px; /* Set desired height */
+            overflow: hidden; /* Hide overflow if necessary */
+            position: relative; /* Positioning for child elements */
+        }
+        iframe {
+            width: 100%; /* Full width of parent div */
+            height: 100%; /* Full height of parent div */
+            border: none; /* Remove default border */
+        }
     </style>
 </head>
 <body>
-    <div id="fr" data='<iframe width="100%" height="100%" src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" frameborder="0" allowfullscreen></iframe>'>
-        <iframe width="100%" height="100%" src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" frameborder="0" allowfullscreen></iframe>
+    <div id="fr" data='<iframe src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" allowfullscreen></iframe>'>
+        <iframe src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@99563e3bf6eb25323e3bd5af20dcd9a261b97991/build/m3m/m3m.xml&amp;container=ig" allowfullscreen></iframe>
     </div>
     <button class="c-button" type="button" onclick="PlayTo(this)" style="display: none;">Play on Classroom 6X</button>
 
     <script>
         function PlayTo(sel) {
-            var div = sel.previousElementSibling; // Use previousElementSibling for better accuracy
+            var div = sel.previousElementSibling;
             div.innerHTML = div.getAttribute('data');
             sel.style.display = "none";
         }
