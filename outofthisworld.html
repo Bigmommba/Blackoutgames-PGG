@@ -3,72 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Out of this world</title>
+    <title>SNES Emulator</title>
     <style>
-        #screen {
-            width: 256px;
-            height: 224px;
+        canvas {
             border: 2px solid black;
         }
     </style>
 </head>
 <body>
-    <h1>Super Nintendo Emulator</h1>
-    <canvas id="screen"></canvas>
-    <br/>
-    <input type="file" id="romFile" accept=".smc" />
-    <button id="loadButton">Load ROM</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/jsnes@1.0.0/dist/jsnes.min.js"></script>
-    <script>
-        const screen = document.getElementById("screen");
-        const romFileInput = document.getElementById("romFile");
-        const loadButton = document.getElementById("loadButton");
+<h1>SNES Emulator</h1>
+<canvas id="snes-canvas" width="256" height="224"></canvas>
+<script src="https://bfirsh.github.io/jsnes/jsnes.min.js"></script>
 
-        // Initialize the NES emulator
-        const nes = new jsnes.NES({
-            onFrame: function(frameBuffer) {
-                const ctx = screen.getContext("2d");
-                const imageData = ctx.createImageData(256, 224);
-                for (let i = 0; i < frameBuffer.length; i++) {
-                    imageData.data[i * 4 + 0] = frameBuffer[i] & 0xFF;
-                    imageData.data[i * 4 + 1] = (frameBuffer[i] >> 8) & 0xFF;
-                    imageData.data[i * 4 + 2] = (frameBuffer[i] >> 16) & 0xFF;
-                    imageData.data[i * 4 + 3] = 0xFF;
-                }
-                ctx.putImageData(imageData, 0, 0);
-            },
-            onAudioSample: function(left, right) {
-                // Handle audio output if desired.
+<script>
+    // Initialize the SNES emulator
+    const canvas = document.getElementById('snes-canvas');
+    const nes = new jsnes.SNES({
+        onFrame: function(framebuffer_24) {
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, 256, 224);
+            const buffer = imageData.data;
+            let i = 0;
+
+            for (let j = 0; j < framebuffer_24.length; j++) {
+                buffer[i++] = (framebuffer_24[j] >> 16) & 0xff; // Red
+                buffer[i++] = (framebuffer_24[j] >> 8) & 0xff;  // Green
+                buffer[i++] = framebuffer_24[j] & 0xff;         // Blue
+                buffer[i++] = 0xff;                             // Alpha
             }
-        });
 
-        // Function to load and play the ROM
-        function loadROM(file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const romData = new Uint8Array(event.target.result);
-                nes.loadROM(romData);
-                requestAnimationFrame(onAnimationFrame);
-            };
-            reader.readAsArrayBuffer(file);
+            ctx.putImageData(imageData, 0, 0);
         }
+    });
 
-        // Animation loop
-        function onAnimationFrame() {
+    // Load the ROM file from a GitHub repository
+    fetch('https://raw.githubusercontent.com/PGG-blackout-games/Blackoutgames-PGG/main/Roms/Out%20of%20This%20World%20(U)%20%5B!%5D.smc')
+        .then(response => response.arrayBuffer())
+        .then(buffer => {
+            nes.loadROM(new Uint8Array(buffer));
             nes.frame();
-            requestAnimationFrame(onAnimationFrame);
-        }
-
-        // Event listener for loading the ROM
-        loadButton.addEventListener("click", function() {
-            const romFile = romFileInput.files[0];
-            if (romFile) {
-                loadROM(romFile);
-            } else {
-                alert("Please select a .smc ROM file to load.");
-            }
+            setInterval(() => nes.frame(), 16); // 60 fps
+        })
+        .catch(error => {
+            console.error('Failed to load the ROM file:', error);
         });
-    </script>
+</script>
+
 </body>
 </html>
