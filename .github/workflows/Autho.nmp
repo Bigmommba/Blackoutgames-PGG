@@ -1,0 +1,5 @@
+# installation with npm
+npm install --save @auth0/auth0-spa-js
+
+# installation with yarn
+yarn add @auth0/auth0-spa-js
