@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Out of this world</title>
+    <style>
+        #screen {
+            width: 256px;
+            height: 224px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Super Nintendo Emulator</h1>
+    <canvas id="screen"></canvas>
+    <br/>
+    <input type="file" id="romFile" accept=".smc" />
+    <button id="loadButton">Load ROM</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsnes@1.0.0/dist/jsnes.min.js"></script>
+    <script>
+        const screen = document.getElementById("screen");
+        const romFileInput = document.getElementById("romFile");
+        const loadButton = document.getElementById("loadButton");
+
+        // Initialize the NES emulator
+        const nes = new jsnes.NES({
+            onFrame: function(frameBuffer) {
+                const ctx = screen.getContext("2d");
+                const imageData = ctx.createImageData(256, 224);
+                for (let i = 0; i < frameBuffer.length; i++) {
+                    imageData.data[i * 4 + 0] = frameBuffer[i] & 0xFF;
+                    imageData.data[i * 4 + 1] = (frameBuffer[i] >> 8) & 0xFF;
+                    imageData.data[i * 4 + 2] = (frameBuffer[i] >> 16) & 0xFF;
+                    imageData.data[i * 4 + 3] = 0xFF;
+                }
+                ctx.putImageData(imageData, 0, 0);
+            },
+            onAudioSample: function(left, right) {
+                // Handle audio output if desired.
+            }
+        });
+
+        // Function to load and play the ROM
+        function loadROM(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const romData = new Uint8Array(event.target.result);
+                nes.loadROM(romData);
+                requestAnimationFrame(onAnimationFrame);
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Animation loop
+        function onAnimationFrame() {
+            nes.frame();
+            requestAnimationFrame(onAnimationFrame);
+        }
+
+        // Event listener for loading the ROM
+        loadButton.addEventListener("click", function() {
+            const romFile = romFileInput.files[0];
+            if (romFile) {
+                loadROM(romFile);
+            } else {
+                alert("Please select a .smc ROM file to load.");
+            }
+        });
+    </script>
+</body>
+</html>
