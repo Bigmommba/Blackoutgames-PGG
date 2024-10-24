@@ -3,24 +3,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>gbajs2</title>
 		<link rel="stylesheet" href="resources/main.css" />
-		<script src="js/util.js"></script>
-		<script src="js/core.js"></script>
-		<script src="js/arm.js"></script>
-		<script src="js/thumb.js"></script>
-		<script src="js/mmu.js"></script>
-		<script src="js/io.js"></script>
-		<script src="js/audio.js"></script>
-		<script src="js/video.js"></script>
-		<script src="js/video/proxy.js"></script>
-		<script src="js/video/software.js"></script>
-		<script src="js/irq.js"></script>
-		<script src="js/keypad.js"></script>
-		<script src="js/sio.js"></script>
-		<script src="js/savedata.js"></script>
-		<script src="js/gpio.js"></script>
-		<script src="js/gba.js"></script>
-		<script src="resources/xhr.js"></script>
-		<script src="resources/biosbin.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/util.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/core.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/arm.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/thumb.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/mmu.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/io.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/audio.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/video.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/video/proxy.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/video/software.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/irq.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/keypad.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/sio.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/savedata.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/gpio.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/js/gba.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/resources/xhr.js"></script>
+		<script src="Emu/GBA/gbajs2-master/gbajs2-master/resources/biosbin.js"></script>
 
 		<script>
 			let gba;
@@ -42,7 +42,7 @@
 					}
 					let crash = document.createElement('img');
 					crash.setAttribute('id', 'crash');
-					crash.setAttribute('src', 'resources/crash.png');
+					crash.setAttribute('src', 'Emu/GBA/gbajs2-master/gbajs2-master/resources/crash.png');
 					screen.parentElement.insertBefore(crash, screen);
 					screen.setAttribute('class', 'dead');
 				});
