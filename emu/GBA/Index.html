@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBA Emulator</title>
+    <title>GBA Emulator - Set Game</title>
     <script src="https://cdn.jsdelivr.net/npm/jsGBA/dist/jsGBA.min.js"></script>
     <style>
         body {
@@ -13,33 +13,40 @@
         canvas {
             border: 2px solid #000;
         }
-        input {
-            margin: 10px;
-        }
     </style>
 </head>
 <body>
     <h1>Play GBA Game</h1>
     <canvas id="screen" width="240" height="160"></canvas>
     <br>
-    <input type="file" id="upload" accept=".gba">
+    <p>Loading game...</p>
     <script>
         // Initialize the GBA emulator
         const gba = new jsGBA(document.getElementById('screen'));
 
-        // Load a ROM file when selected by the user
-        document.getElementById('upload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const romData = e.target.result;
-                    gba.loadRom(romData);
-                    gba.run();  // Start the emulator
-                };
-                reader.readAsArrayBuffer(file);  // Read the ROM file as binary data
+        // Function to load the ROM from the GitHub repository
+        async function loadRomFromGitHub(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch the ROM');
+                }
+                const romData = await response.arrayBuffer(); // Load the ROM as binary data
+                gba.loadRom(romData); // Load ROM into emulator
+                gba.run(); // Start the emulator
+                document.querySelector('p').innerText = "Game is running...";
+            } catch (error) {
+                document.querySelector('p').innerText = `Error: ${error.message}`;
             }
-        });
+        }
+
+        // URL to the GBA ROM in your GitHub repository (raw link)
+        const romUrl = 'https://raw.githubusercontent.com/vbaemulator/GBA-Roms/main/LEGO%20Star%20Wars%20-%20The%20Video%20Game%20(USA%2C%20Europe)%20(En%2CFr%2CDe%2CEs%2CIt%2CNl%2CDa).zip';
+
+        // Load the ROM when the page loads
+        window.onload = () => {
+            loadRomFromGitHub(romUrl);
+        };
     </script>
 </body>
 </html>
