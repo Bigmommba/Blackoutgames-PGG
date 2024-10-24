@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBA Emulator - Set Game</title>
+    <title>GBA Emulator - LEGO Star Wars</title>
     <script src="https://cdn.jsdelivr.net/npm/jsGBA/dist/jsGBA.min.js"></script>
     <style>
         body {
@@ -16,18 +16,18 @@
     </style>
 </head>
 <body>
-    <h1>Play GBA Game</h1>
+    <h1>LEGO Star Wars - The Video Game (USA, Europe)</h1>
     <canvas id="screen" width="240" height="160"></canvas>
     <br>
- 
+    <p>Loading game...</p>
     <script>
         // Initialize the GBA emulator
         const gba = new jsGBA(document.getElementById('screen'));
 
         // Function to load the ROM from the GitHub repository
-        async function loadRomFromGitHub(https://raw.githubusercontent.com/PGG-blackout-games/Blackoutgames-PGG/main/emu/GBA/LEGO%20Star%20Wars%20-%20The%20Video%20Game%20(USA%2C%20Europe)%20(En%2CFr%2CDe%2CEs%2CIt%2CNl%2CDa).gba) {
+        async function loadRomFromGitHub(url) {
             try {
-                const response = await fetch(url;);
+                const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Failed to fetch the ROM');
                 }
@@ -40,7 +40,7 @@
             }
         }
 
-        // URL to the GBA ROM in your GitHub repository (raw link)
+        // URL to the LEGO Star Wars ROM in your GitHub repository (raw link)
         const romUrl = 'https://raw.githubusercontent.com/PGG-blackout-games/Blackoutgames-PGG/main/emu/GBA/LEGO%20Star%20Wars%20-%20The%20Video%20Game%20(USA%2C%20Europe)%20(En%2CFr%2CDe%2CEs%2CIt%2CNl%2CDa).gba';
 
         // Load the ROM when the page loads
