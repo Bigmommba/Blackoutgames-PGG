@@ -1,3 +1,2 @@
  npm install web-terminal -g
 
- web-terminal --port 8088
