@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
             favicon: "/images/icons/googledrive.ico",
             title: "My Drive"
         }
+       
     };
 
     if (selectedPreset && presets[selectedPreset]) {
