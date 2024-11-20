@@ -1,1 +1,130 @@
-(()=>{var e=function(e){var t=RegExp("[?&]".concat(e,"=([^&]*)")).exec(window.location.search);return t&&decodeURIComponent(t[1].replace(/\+/g," "))},t="kids"===e("tag"),n=!!window.adBridge,o="yes"===e("hoist")||"yes"===e("gdhoist"),i=new(function(){function e(){var e=this;this.queue=[],this.init=function(t,n){return void 0===t&&(t={}),void 0===n&&(n={}),new Promise((function(o,i){e.enqueue("init",[t,n],o,i)}))},this.rewardedBreak=function(){return new Promise((function(e){e(!1)}))},this.commercialBreak=function(t){return new Promise((function(n,o){e.enqueue("commercialBreak",[t],n,o)}))},this.displayAd=function(e,t,n,o){o&&o(!0),n&&n()},this.withArguments=function(t){return function(){for(var n=[],o=0;o<arguments.length;o++)n[o]=arguments[o];e.enqueue(t,n)}},this.handleAutoResolvePromise=function(){return new Promise((function(e){e()}))},this.throwNotLoaded=function(){console.debug("PokiSDK is not loaded yet. Not all methods are available.")},this.doNothing=function(){}}return e.prototype.enqueue=function(e,n,o,i){var r={fn:e,args:n||[],resolveFn:o,rejectFn:i};t?o&&o(!0):this.queue.push(r)},e.prototype.dequeue=function(){for(var e=this,t=function(){var t,o,i=n.queue.shift(),r=i,a=r.fn,u=r.args;if("function"==typeof window.PokiSDK[a])if((null==i?void 0:i.resolveFn)||(null==i?void 0:i.rejectFn)){var c="init"===a;if((t=window.PokiSDK)[a].apply(t,u).catch((function(){for(var t=[],n=0;n<arguments.length;n++)t[n]=arguments[n];"function"==typeof i.rejectFn&&i.rejectFn.apply(i,t),c&&setTimeout((function(){e.dequeue()}),0)})).then((function(){for(var t=[],n=0;n<arguments.length;n++)t[n]=arguments[n];"function"==typeof i.resolveFn&&i.resolveFn.apply(i,t),c&&setTimeout((function(){e.dequeue()}),0)})),c)return"break"}else(o=window.PokiSDK)[a].apply(o,u);else console.error("Cannot execute ".concat(a))},n=this;this.queue.length>0;){if("break"===t())break}},e}());window.PokiSDK={init:i.init,initWithVideoHB:i.init,commercialBreak:i.commercialBreak,rewardedBreak:i.rewardedBreak,displayAd:i.displayAd,destroyAd:i.doNothing,getLeaderboard:i.handleAutoResolvePromise,shareableURL:function(){return new Promise((function(e,t){return t()}))},getURLParam:function(t){return e("gd".concat(t))||e(t)||""},getLanguage:function(){return navigator.language.toLowerCase().split("-")[0]},isAdBlocked:function(){}},["captureError","customEvent","gameInteractive","gameLoadingFinished","gameLoadingProgress","gameLoadingStart","gameplayStart","gameplayStop","happyTime","logError","muteAd","roundEnd","roundStart","sendHighscore","setDebug","setDebugTouchOverlayController","setLogging","setPlayerAge","setPlaytestCanvas","enableEventTracking","playtestSetCanvas","playtestCaptureHtmlOnce"].forEach((function(e){window.PokiSDK[e]=i.withArguments(e)}));var r=function(){var i=window.pokiSDKVersion||e("ab")||"5443f10e0bfac1bb0eb31054b8513ef81e6cc7c1",r="poki-sdk-core-".concat(i,".js");t&&(r="poki-sdk-kids-".concat(i,".js")),n&&(r="poki-sdk-playground-".concat(i,".js")),o&&(r="poki-sdk-hoist-".concat(i,".js"));new URL(document.currentScript.src);return"scripts/".concat(i,"/").concat(r)}(),a=document.createElement("script");a.setAttribute("src",r),a.setAttribute("type","text/javascript"),a.setAttribute("crossOrigin","anonymous"),a.onload=function(){return i.dequeue()},document.head.appendChild(a)})();
+(() => {
+    // Helper function to get URL query parameters safely
+    const getURLParam = (key) => {
+        try {
+            const regex = new RegExp(`[?&]${key}=([^&]*)`);
+            const match = regex.exec(window.location.search);
+            return match ? decodeURIComponent(match[1].replace(/\+/g, " ")) : null;
+        } catch (error) {
+            console.error(`Error getting URL parameter '${key}':`, error);
+            return null;
+        }
+    };
+
+    const isKidsMode = getURLParam("tag") === "kids";
+    const hasAdBridge = !!window.adBridge;
+    const isHoistMode = ["yes", "yes"].includes(getURLParam("hoist")) || getURLParam("gdhoist") === "yes";
+
+    class SDKManager {
+        constructor() {
+            this.queue = [];
+            this.isInitialized = false;
+        }
+
+        enqueue(fnName, args, resolve, reject) {
+            if (this.isInitialized) {
+                resolve && resolve(true); // Automatically resolve if initialized
+            } else {
+                this.queue.push({ fnName, args, resolve, reject });
+            }
+        }
+
+        dequeue() {
+            while (this.queue.length > 0) {
+                const { fnName, args, resolve, reject } = this.queue.shift();
+
+                if (typeof window.PokiSDK?.[fnName] === "function") {
+                    const isInit = fnName === "init";
+
+                    // Safely execute SDK methods
+                    window.PokiSDK[fnName](...args)
+                        .then((...results) => {
+                            resolve && resolve(...results);
+                            if (isInit) this.dequeue();
+                        })
+                        .catch((error) => {
+                            console.error(`Error in '${fnName}':`, error);
+                            reject && reject(error);
+                            if (isInit) this.dequeue();
+                        });
+
+                    if (isInit) break; // Dequeue only after init
+                } else {
+                    console.error(`Function '${fnName}' is not available in PokiSDK.`);
+                }
+            }
+        }
+    }
+
+    // Create SDKManager instance
+    const sdkManager = new SDKManager();
+
+    // Public API
+    window.PokiSDK = {
+        init: (config = {}, options = {}) => new Promise((resolve, reject) => sdkManager.enqueue("init", [config, options], resolve, reject)),
+        commercialBreak: (config) => new Promise((resolve, reject) => sdkManager.enqueue("commercialBreak", [config], resolve, reject)),
+        rewardedBreak: () => Promise.resolve(false),
+        displayAd: (config, onSuccess, onFailure) => {
+            onSuccess && onSuccess();
+            onFailure && onFailure();
+        },
+        shareableURL: () => Promise.reject(new Error("shareableURL is not implemented.")),
+        getURLParam: getURLParam,
+        getLanguage: () => (navigator.language || "en").toLowerCase().split("-")[0],
+    };
+
+    // Add placeholders for additional methods
+    [
+        "captureError",
+        "customEvent",
+        "gameInteractive",
+        "gameLoadingFinished",
+        "gameLoadingProgress",
+        "gameLoadingStart",
+        "gameplayStart",
+        "gameplayStop",
+        "happyTime",
+        "logError",
+        "muteAd",
+        "roundEnd",
+        "roundStart",
+        "sendHighscore",
+        "setDebug",
+        "setLogging",
+    ].forEach((method) => {
+        window.PokiSDK[method] = (...args) => sdkManager.enqueue(method, args);
+    });
+
+    // Dynamically load SDK script
+    const loadSDKScript = () => {
+        try {
+            const sdkVersion = window.pokiSDKVersion || getURLParam("ab") || "default-sdk-version";
+            let sdkFileName = `poki-sdk-core-${sdkVersion}.js`;
+
+            if (isKidsMode) sdkFileName = `poki-sdk-kids-${sdkVersion}.js`;
+            if (hasAdBridge) sdkFileName = `poki-sdk-playground-${sdkVersion}.js`;
+            if (isHoistMode) sdkFileName = `poki-sdk-hoist-${sdkVersion}.js`;
+
+            const sdkScriptURL = `scripts/${sdkVersion}/${sdkFileName}`;
+            const script = document.createElement("script");
+            script.src = sdkScriptURL;
+            script.type = "text/javascript";
+            script.crossOrigin = "anonymous";
+
+            script.onload = () => {
+                sdkManager.isInitialized = true;
+                sdkManager.dequeue(); // Process queue
+            };
+
+            script.onerror = (error) => {
+                console.error("Failed to load PokiSDK script:", error);
+            };
+
+            document.head.appendChild(script);
+        } catch (error) {
+            console.error("Error loading SDK script:", error);
+        }
+    };
+
+    loadSDKScript();
+})();
