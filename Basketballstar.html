@@ -22,74 +22,7 @@
         </style>
         <script src="../../storage/js/cloak.js"></script>
     </head>
-    <style>
-        /* Basic styling for the overlay */
-        #popup-ad {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Make sure it is above other content */
-        }
-        
-        /* Styling for the ad box */
-        .ad-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-        }
-
-        /* Close button styling */
-        .close-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Popup ad container -->
-    <div id="popup-ad">
-        <div class="ad-content">
-            <h2>Please wait!</h2>
-            <p>The game take a second to load it will be a black screen for around 30 second </p>
-            <button class="close-btn" onclick="hideAd()">OK</button>
-        </div>
-    </div>
-
-    <script>
-        // Function to show the popup ad
-        function showAd() {
-            document.getElementById('popup-ad').style.display = 'flex'; // Show the popup
-            // Hide the popup after 30 seconds
-            setTimeout(hideAd, 30000); 
-        }
-
-        // Function to hide the popup ad
-        function hideAd() {
-            document.getElementById('popup-ad').style.display = 'none'; // Hide the popup
-        }
-
-        // Show the popup ad when the page loads
-        window.onload = function() {
-            showAd();
-        };
-    </script>
-</body>
-</html>
-
+ 
 
 
 
