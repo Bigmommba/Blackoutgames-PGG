@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@poki/netlib": "^0.0.14"
+    "@poki/netlib": "^0.0.14",
+    "@vercel/speed-insights": "^1.1.0"
   }
 }
