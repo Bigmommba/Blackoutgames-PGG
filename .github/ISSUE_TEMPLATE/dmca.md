@@ -3,7 +3,7 @@ name: DMCA
 about: Dmca
 title: ''
 labels: ''
-assignees: DotLYHiyou
+assignees: ''
 
 ---
 
