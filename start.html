@@ -272,6 +272,135 @@
     }
   </style>
 
+
+
+<!-- Advertisement Popup -->
+<div class="ad-popup" id="adPopup">
+  <button class="close-btn" onclick="closeAd()">Close</button>
+  <div class="ad-header">𝒩𝑒𝓌 𝑔𝒶𝓂𝑒 </div>
+  <div class="ad-subtext">𝚛𝚎𝚝𝚛𝚘 𝚋𝚘𝚠𝚕 𝙲𝚘𝚕𝚕𝚎𝚐𝚎 𝚑𝚊𝚜 𝚋𝚎𝚎𝚗 𝚏𝚒𝚡</div>
+   
+  </div>
+</div>
+
+<style>
+  .ad-popup {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 10000px;
+    background: linear-gradient(135deg, #ff9500, #cc0022);
+    color: rgb(255, 255, 255); /* text color */
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 15px rgba(255, 255, 255, 0.2);
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateX(-50%) translateY(100%);
+    }
+    to {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .ad-header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 10px;
+  }
+
+  .ad-subtext {
+    font-size: .8rem;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .cta-button {
+    display: block;
+    background: #292020;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  .cta-button:hover {
+    background: #ff1e40;
+    transform: scale(1.05);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .close-btn:hover {
+    color: #ffa200;
+  }
+</style>
+
+<script>
+  // Function to get the current timestamp in milliseconds
+  function getCurrentTimestamp() {
+    return new Date().getTime();
+  }
+
+  // Function to check if 3 days have passed since the ad was closed
+  function hasThreeDaysPassed(lastClosedTimestamp) {
+    const THREE_DAYS_IN_MS = 5 * 24 * 60 * 60 * 1000 ; // 5 days in milliseconds
+    const currentTimestamp = getCurrentTimestamp();
+    return currentTimestamp - lastClosedTimestamp > THREE_DAYS_IN_MS;
+  }
+
+  // Check if the ad has been closed and reset every 5 days
+  window.onload = function() {
+    const adClosedTimestamp = localStorage.getItem('adClosedTimestamp');
+    
+    // DEBUGGING STEP: Check the timestamp in localStorage
+    console.log('Ad closed timestamp in localStorage:', adClosedTimestamp);
+
+    if (!adClosedTimestamp || hasThreeDaysPassed(Number(adClosedTimestamp))) {
+      // Show the ad if no timestamp or 3 days have passed
+      document.getElementById('adPopup').style.display = 'block';
+    } else {
+      // Hide the ad if it's still within the 3 days
+      document.getElementById('adPopup').style.display = 'none';
+    }
+  };
+
+  // Function to close the ad and store the timestamp
+  function closeAd() {
+    const adPopup = document.getElementById('adPopup');
+    adPopup.style.display = 'none'; // Hide the ad
+    
+    // Store the current timestamp in localStorage
+    localStorage.setItem('adClosedTimestamp', getCurrentTimestamp());
+    
+    // DEBUGGING STEP: Log to confirm close action
+    console.log('Ad closed. Timestamp set in localStorage:', localStorage.getItem('adClosedTimestamp'));
+  }
+</script>
+
+
 </body>
 
 </html>
