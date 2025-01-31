@@ -1,7 +1,7 @@
 :root {
     --build-bg-color: #aeb6c2;
-    --card-color: #fafcfd;
-    --hover-card-color: #e5e5ed;
+    --card-color: #000000;
+    --hover-card-color: #5f0000;
 }
 
 body {
@@ -28,7 +28,7 @@ select {
 }
 
 select option {
-    background-color: #fff;
+    background-color: #000000;
 }
 
 input {
@@ -121,7 +121,7 @@ summary {
 }
 
 .SVG-button:hover {
-    background-color: #eee;
+    background-color: #ffffff;
 }
 
 #experiment-button {
