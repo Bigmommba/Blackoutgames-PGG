@@ -1610,73 +1610,73 @@ summary {
 }
 
 #constraint-1 {
-    background-color: hsl(240, 18%, 95%);
+    background-color: hsl(0, 0%, 0%);
     border-radius: 7px 7px 0 0;
 }
 
 #constraint-2 {
-    background-color: hsl(240, 18%, 93%);
+    background-color: hsl(0, 0%, 0%);
 }
 
 #constraint-3 {
-    background-color: hsl(240, 18%, 89%);
+    background-color: hsl(0, 0%, 0%);
 }
 
 #constraint-4 {
-    background-color: hsl(240, 18%, 85%);
+    background-color: hsl(0, 0%, 0%);
 }
 
 #constraint-5 {
-    background-color: hsl(240, 18%, 81%);
+    background-color: hsl(0, 0%, 0%);
 }
 
 #constraint-6 {
-    background-color: hsl(240, 18%, 77%);
+    background-color: hsl(0, 0%, 0%);
 }
 
 #constraint-7 {
-    background-color: hsl(240, 18%, 73%);
+    background-color: hsl(0, 0%, 0%);
     border-radius: 0 0 7px 7px;
 }
 
 #constraint-1:hover {
-    background-color: hsl(240, 18%, 93%);
+    background-color: hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-2:hover {
-    background-color: hsl(240, 18%, 91%);
+    background-color: hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-3:hover {
-    background-color: hsl(240, 18%, 87%);
+    background-color: hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-4:hover {
-    background-color: hsl(240, 18%, 83%);
+    background-color:hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-5:hover {
-    background-color: hsl(240, 18%, 79%);
+    background-color: hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-6:hover {
-    background-color: hsl(240, 18%, 75%);
+    background-color: hsl(0, 85%, 27%));
     border: 1px #444 solid;
     padding: 9px;
 }
 
 #constraint-7:hover {
-    background-color: hsl(240, 18%, 71%);
+    background-color:hsl(0, 85%, 27%);
     border: 1px #444 solid;
     padding: 9px;
 }
