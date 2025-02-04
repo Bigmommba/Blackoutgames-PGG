@@ -1,6 +1,8 @@
 :root {
     --build-bg-color: #aeb6c2;
-    --card-color: #000000;
+    --build-bgt-color: #0062f5;
+    --build-bgtt-color: #45942d;
+    --card-color: rgb(0, 0, 0);
     --hover-card-color: #5f0000;
 }
 
@@ -101,12 +103,12 @@ td {
     width: 15px;
     padding: 0px 2px;
     border: 2px solid #333;
-    background-color: #fff;
+    background-color: #24137e;
     text-align: center;
 }
 
 .key-used {
-    color: #777;
+    color: #00389f;
     font-size: 80%;
 }
 
@@ -117,11 +119,11 @@ summary {
 .SVG-button {
     border: 1.5px #333 solid;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #ff0000;
 }
 
 .SVG-button:hover {
-    background-color: #ffffff;
+    background-color: #bf0000;
 }
 
 #experiment-button {
@@ -333,7 +335,7 @@ summary {
 
 .experiment-grid-module {
     line-height: 160%;
-    background-color: var(--card-color);
+    background-color: var(--build-bg-color);
     font-size: 0.75em;
 }
 
@@ -353,7 +355,7 @@ summary {
 }
 
 .experiment-start-box {
-    background-color: var(--card-color);
+    background-color: #333;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -386,9 +388,9 @@ summary {
 }
 
 .card-text {
-    background-color: var(--card-color);
+    background-color: ;
     padding: 0.5em 1em;
-    border: 1px solid #444;
+    border: 1px solid #ff0000;
     margin-top: -1px;
     margin-right: -1px;
     font-size: 0.92em;
@@ -929,7 +931,7 @@ summary {
 }
 
 .color-laser {
-    color: #f02;
+    color: rgb(87, 3, 147);
     font-weight: 100;
     letter-spacing: -0.8px;
 }
@@ -1691,7 +1693,7 @@ summary {
 }
 
 .pause-details {
-    background-color: #e2e9ec;
+    background-color: hsl(0, 85%, 27%);
     border: 1px solid #333;
     border-radius: 5px;
     padding: 7px;
@@ -1703,7 +1705,7 @@ summary {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    background-color: #fff;
+    background-color: hsl(0, 85%, 27%);
     border-radius: 0.3em;
     padding: 0.2em 0.3em;
     border: solid #000 1px;
