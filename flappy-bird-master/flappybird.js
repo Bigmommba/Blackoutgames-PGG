@@ -1,6 +1,6 @@
 //board
 let board;
-let boardWidth = 650;
+let boardWidth = 750;
 let boardHeight = 620;
 let context;
 
@@ -39,8 +39,11 @@ let highScore = localStorage.getItem("highScore") || 0;
 let gameStarted = false;
 
 // Gradual speed-up
-let pipeSpeedIncreaseRate = 0.0001; // rate at which pipe speed increases
-let maxPipeSpeed = -20; // maximum horizontal speed for pipes
+let pipeSpeedIncreaseRate = 0.0001;
+let maxPipeSpeed = -30;
+
+// Sound effect
+let deathSound = new Audio("./sfx_hit.wav");
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -97,15 +100,12 @@ function update() {
 
     context.clearRect(0, 0, board.width, board.height);
 
-    // Gradually increase pipe speed over time, making it harder
     if (velocityX > maxPipeSpeed) {
-        velocityX -= pipeSpeedIncreaseRate; // decrease (make more negative) velocityX to increase speed
+        velocityX -= pipeSpeedIncreaseRate;
     }
 
     velocityY += gravity;
-    
-    // Apply the bird's new position with the updated velocity
-    bird.y = Math.max(bird.y + velocityY, 0); // Keep the bird from going off the top of the screen
+    bird.y = Math.max(bird.y + velocityY, 0);
     context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
     if (bird.y > board.height) gameOver = true;
@@ -133,6 +133,9 @@ function update() {
     context.fillText("High Score: " + highScore, 5, 90);
 
     if (gameOver) {
+        // Play death sound
+        deathSound.play();
+
         if (score > highScore) {
             highScore = score;
             localStorage.setItem("highScore", highScore);
