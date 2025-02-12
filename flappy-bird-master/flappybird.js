@@ -85,7 +85,7 @@ function startGame(e) {
         score = 0;
         bird.y = birdY;
         pipeArray = [];
-        setInterval(placePipes, 850);
+        setInterval(placePipes, 1200);
         requestAnimationFrame(update);
     }
 }
