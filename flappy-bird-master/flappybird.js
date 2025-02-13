@@ -104,7 +104,7 @@ function showStartMenu() {
     button.textContent = "Enable Risky Death Sound";
     button.style.position = "absolute";
     button.style.bottom = "20px";  // Position at the bottom
-    button.style.left = "50%";
+    button.style.left = "90%";
     button.style.transform = "translateX(-50%)"; // Center horizontally
     button.style.fontSize = "20px";
     button.style.padding = "12px 25px";
