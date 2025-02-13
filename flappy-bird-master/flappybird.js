@@ -42,8 +42,14 @@ let gameStarted = false;
 let pipeSpeedIncreaseRate = 0.0001;
 let maxPipeSpeed = -30;
 
+// Pipe spawn timing (dynamic)
+let pipeSpawnRate = 1200; // Initial spawn rate in ms
+let minPipeSpawnRate = 400; // Minimum spawn interval
+let pipeSpawnDecay = 10; // How much time decreases per spawn
+
 // Sound effect
-let deathSound = new Audio("./sfx_hit.wav");
+let deathSound = new Audio("./death.wav");
+let playDeathSound = false; // Default: Do not play sound
 
 window.onload = function () {
     board = document.getElementById("board");
@@ -63,7 +69,6 @@ window.onload = function () {
     bottomPipeImg = new Image();
     bottomPipeImg.src = "./bottompipe.png";
 
-    requestAnimationFrame(update);
     showStartMenu();
 
     document.addEventListener("keydown", startGame);
@@ -78,6 +83,45 @@ function showStartMenu() {
     context.font = "25px sans-serif";
     context.fillText("Press SPACE or UP ARROW to Start", boardWidth / 4, boardHeight / 2);
     context.fillText("High Score: " + highScore, boardWidth / 4, boardHeight / 1.5);
+
+    // Create play sound toggle button at the bottom
+    let button = document.createElement("button");
+    button.textContent = "Enable Risky Death Sound";
+    button.style.position = "absolute";
+    button.style.bottom = "20px";  // Position at the bottom
+    button.style.left = "50%";
+    button.style.transform = "translateX(-50%)"; // Center horizontally
+    button.style.fontSize = "20px";
+    button.style.padding = "12px 25px";
+    button.style.backgroundColor = "#4CAF50"; // Green button
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.borderRadius = "5px";
+    button.style.cursor = "pointer";
+    button.style.transition = "all 0.3s"; // Smooth transition for hover effect
+
+    // Hover effect
+    button.onmouseover = () => {
+        button.style.backgroundColor = "#45a049";
+    };
+    button.onmouseout = () => {
+        button.style.backgroundColor = "#4CAF50";
+    };
+
+    button.onclick = toggleSound;
+    document.body.appendChild(button);
+}
+
+function toggleSound() {
+    playDeathSound = !playDeathSound;
+    if (playDeathSound) {
+        alert("Death sound enabled!");
+    } else {
+        alert("Death sound disabled!");
+    }
+
+    // Remove the button after selection
+    document.querySelector("button").style.display = "none";
 }
 
 function startGame(e) {
@@ -88,7 +132,13 @@ function startGame(e) {
         score = 0;
         bird.y = birdY;
         pipeArray = [];
-        setInterval(placePipes, 1200);
+
+        // Reset pipe spawn rate to default when restarting
+        pipeSpawnRate = 1200;
+
+        // Start dynamically spawning pipes
+        setInterval(spawnPipesWithDecay, pipeSpawnRate);  // Use setInterval to continuously spawn pipes
+
         requestAnimationFrame(update);
     }
 }
@@ -133,8 +183,10 @@ function update() {
     context.fillText("High Score: " + highScore, 5, 90);
 
     if (gameOver) {
-        // Play death sound
-        deathSound.play();
+        // Play death sound only if enabled
+        if (playDeathSound) {
+            deathSound.play();
+        }
 
         if (score > highScore) {
             highScore = score;
@@ -162,6 +214,15 @@ function placePipes() {
 
     let bottomPipe = { img: bottomPipeImg, x: pipeX, y: randomPipeY + pipeHeight + openingSpace, width: pipeWidth, height: pipeHeight, passed: false };
     pipeArray.push(bottomPipe);
+}
+
+function spawnPipesWithDecay() {
+    if (gameOver) return;
+
+    placePipes();
+
+    // Decrease spawn rate over time but not below the minimum
+    pipeSpawnRate = Math.max(pipeSpawnRate - pipeSpawnDecay, minPipeSpawnRate);
 }
 
 function moveBird(e) {
