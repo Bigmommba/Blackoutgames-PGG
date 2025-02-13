@@ -108,7 +108,7 @@ function showStartMenu() {
     button.style.transform = "translateX(-50%)"; // Center horizontally
     button.style.fontSize = "20px";
     button.style.padding = "12px 25px";
-    button.style.backgroundColor = "#4CAF50"; // Green button
+    button.style.backgroundColor = "#d52d09"; // Green button
     button.style.color = "white";
     button.style.border = "none";
     button.style.borderRadius = "5px";
@@ -142,7 +142,7 @@ function toggleSound() {
 function startGame(e) {
     if (gameStarted || paused) return;  // If paused, don't start the game
 
-    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyW") {
         gameStarted = true;
         gameOver = false;
         score = 0;
@@ -262,7 +262,7 @@ function spawnPipesWithDecay() {
 }
 
 function moveBird(e) {
-    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyW") {
         velocityY = -6;
 
         if (gameOver) {
