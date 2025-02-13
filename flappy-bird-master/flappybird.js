@@ -216,6 +216,9 @@ function update() {
         context.fillText("Press SPACE or UP ARROW to Restart", boardWidth / 4, boardHeight / 2);
         context.fillText("Score: " + score, boardWidth / 4, boardHeight / 1.7);
         context.fillText("High Score: " + highScore, boardWidth / 4, boardHeight / 1.5);
+        pipeSpawnRate = 1200;
+        dynamicOpeningSpace = 200;
+
     }
 }
 
