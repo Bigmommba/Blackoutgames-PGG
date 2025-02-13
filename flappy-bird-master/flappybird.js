@@ -51,6 +51,9 @@ let pipeSpawnDecay = 10; // How much time decreases per spawn
 let deathSound = new Audio("./death.wav");
 let playDeathSound = false; // Default: Do not play sound
 
+// New paused flag
+let paused = false;
+
 window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
@@ -73,6 +76,18 @@ window.onload = function () {
 
     document.addEventListener("keydown", startGame);
     document.addEventListener("keydown", moveBird);
+
+    // Pause and unpause the game when 'P' is pressed
+    document.addEventListener("keydown", function (e) {
+        if (e.code === "KeyP") {
+            paused = !paused; // Toggle pause state
+            if (paused) {
+                showPauseMenu(); // Show the pause menu
+            } else {
+                update(); // Resume the game
+            }
+        }
+    });
 };
 
 function showStartMenu() {
@@ -125,7 +140,8 @@ function toggleSound() {
 }
 
 function startGame(e) {
-    if (gameStarted) return;
+    if (gameStarted || paused) return;  // If paused, don't start the game
+
     if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
         gameStarted = true;
         gameOver = false;
@@ -144,7 +160,7 @@ function startGame(e) {
 }
 
 function update() {
-    if (!gameStarted) return;
+    if (!gameStarted || paused) return; // Don't update game if paused
     requestAnimationFrame(update);
     if (gameOver) return;
 
@@ -203,21 +219,38 @@ function update() {
     }
 }
 
+// New function to show the pause menu
+function showPauseMenu() {
+    context.clearRect(0, 0, board.width, board.height);
+    context.fillStyle = "rgba(0, 0, 0, 0.5)";  // Semi-transparent background
+    context.fillRect(0, 0, board.width, board.height);
+    context.fillStyle = "white";
+    context.font = "40px sans-serif";
+    context.fillText("Paused", boardWidth / 2 - 60, boardHeight / 3);
+    context.font = "25px sans-serif";
+    context.fillText("Press P to Resume", boardWidth / 2 - 80, boardHeight / 2);
+    context.fillText("Press SPACE or UP ARROW to Restart", boardWidth / 2 - 120, boardHeight / 1.7);
+}
+
+let dynamicOpeningSpace = 200;  // Start with a larger gap
+
 function placePipes() {
-    if (gameOver) return;
+    if (gameOver || paused) return;
 
     let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
-    let openingSpace = board.height / 4;
+    
+    // Decrease the opening space over time to make pipes closer
+    dynamicOpeningSpace = Math.max(dynamicOpeningSpace - 1, 50); // Keeps it above 50px
 
     let topPipe = { img: topPipeImg, x: pipeX, y: randomPipeY, width: pipeWidth, height: pipeHeight, passed: false };
     pipeArray.push(topPipe);
 
-    let bottomPipe = { img: bottomPipeImg, x: pipeX, y: randomPipeY + pipeHeight + openingSpace, width: pipeWidth, height: pipeHeight, passed: false };
+    let bottomPipe = { img: bottomPipeImg, x: pipeX, y: randomPipeY + pipeHeight + dynamicOpeningSpace, width: pipeWidth, height: pipeHeight, passed: false };
     pipeArray.push(bottomPipe);
 }
 
 function spawnPipesWithDecay() {
-    if (gameOver) return;
+    if (gameOver || paused) return;
 
     placePipes();
 
