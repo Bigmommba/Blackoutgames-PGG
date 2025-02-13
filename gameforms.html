@@ -1,33 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
-        <script>
-            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-          </script>
-          <script defer src="/_vercel/insights/script.js"></script>
-          <script>
-            window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-          </script>
-          <script defer src="/_vercel/speed-insights/script.js"></script>
-        
-        <title>Game request <form action=""></form></title>
-        <link rel="shortcut icon" href="../../images/ico.ico">
-        <style>
-            body {
-                background-color: black;
-                color: white;;
-            }
-        </style>
-        <script src="../../storage/js/cloak.js"></script>
-    </head>
-  
-</script>
-</head>
-    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>Game Request Form</title>
     <style>
         body {
             background-color: #000;
@@ -39,68 +15,70 @@
             height: 100vh;
             margin: 0;
         }
-        form {
-            background-color: rgba(255, 255, 255, 0.1);
+
+        .form-container {
+            background: #111;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            width: 500px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            width: 300px;
         }
+
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            font-size: 14px;
         }
-        input[type="text"] {
+
+        input, textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-top: 5px;
             border: none;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background: #222;
             color: #fff;
         }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
         button {
+            width: 100%;
             padding: 10px;
+            margin-top: 15px;
             border: none;
             border-radius: 5px;
-            background-color: #ff4081;
-            color: #fff;
+            background: #ff4c4c;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: 0.3s;
         }
+
         button:hover {
-            background-color: #ff1c7a;
+            background: #ff1f1f;
         }
     </style>
 </head>
 <body>
 
-<form name="contact" netlify>
-
-    <p>
-        <label for="Users name">User's Name:</label>
-        <input type="text" name="User name" id="user name" required />
-    </p>
-    <p>
-        <label for="Email">Email:</label>
-        <input type="text" name="email" id="email" required />
-    </p>
-
-    <p>
-        <label for="gameName">Game Name:</label>
-        <input type="text" name="game Name" id="game Name" required />
-      
-    </p>
-   <p>
-        <label for="Gameurl">Game Url (if applicable):</label>
-        <input type="text" name="game url" id="game Url"  />
-      
-    </p>
-    <p>
-        <button type="submit">Send</button>
-    </p>
-</form>
+    <div class="form-container">
+        <form action="https://www.formbackend.com/f/30166feb5144934b" method="POST">
+            <label>Your Email:
+                <input type="email" name="email" required>
+            </label>
+            <label>User's name:
+                <input type="name" name="name" required>
+            </label>
+            <label>Game Name:
+                <textarea name="message" required></textarea>
+            </label>
+            <button type="submit">Send</button>
+        </form>
+    </div>
 
 </body>
 </html>
-
