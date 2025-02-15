@@ -1,84 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Request Form</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .form-container {
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: none;
-            border-radius: 5px;
-            background: #222;
-            color: #fff;
-        }
-
-        textarea {
-            resize: none;
-            height: 100px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            background: #ff4c4c;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #ff1f1f;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="form-container">
-        <form action="https://api.form-data.com/f/f2ggGSkmNaO6L4" method="POST">
-            <label>Your Email:
-                <input type="email" name="email" required>
-            </label>
-            <label>User's name:
-                <input type="name" name="name" required>
-            </label>
-            <label>What would you like to be fixed or added:
-                <textarea name="message" required></textarea>
-            </label>
-            <button type="submit">Send</button>
-        </form>
-    </div>
-
-</body>
-</html>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fc;
+    }
+  
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    h6 {
+      text-align: center;
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      text-align: center;
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    label {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #444;
+    }
+  
+    input, textarea {
+      font-size: 1rem;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+    }
+  
+    input:focus, textarea:focus {
+      border-color: #5b9bd5;
+    }
+  
+    button {
+      background-color: #5b9bd5;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    button:hover {
+      background-color: #4a8ac6;
+    }
+  </style>
+  
+  <div class="container">
+    <h6>Contact Form</h6>
+    <p>
+      This is the simplest way to use Form-Data. Just copy the form endpoint URL to the form 'action' property, and make sure that the 'method' property is set to 'post'.
+    </p>
+    <form action="https://api.form-data.com/f/f2ggGSkmNaO6L4" method="post" target="_blank">
+      <div>
+        <label for="email">Email</label>
+        <input name="email" type="email" required />
+      </div>
+      <div>
+        <label for="name">Name</label>
+        <input name="name" type="name" required />
+      </div>
+      <div>
+        <label for="message">Message</label>
+        </div>
+        <div>
+        <textarea name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
