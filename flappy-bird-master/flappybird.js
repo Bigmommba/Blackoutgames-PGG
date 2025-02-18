@@ -47,8 +47,9 @@ let pipeSpawnRate = 1200; // Initial spawn rate in ms
 let minPipeSpawnRate = 400; // Minimum spawn interval
 let pipeSpawnDecay = 10; // How much time decreases per spawn
 
-// Sound effect
+// Sound effects
 let deathSound = new Audio("./death.wav");
+let alternativeSound = new Audio("./sfx_hit.wav"); // Use sfx_die.wav as the alternative sound
 let playDeathSound = false; // Default: Do not play sound
 
 // New paused flag
@@ -61,7 +62,7 @@ window.onload = function () {
     context = board.getContext("2d");
 
     birdImg = new Image();
-    birdImg.src = "./flappybird.png";
+    birdImg.src = "./flappybird.gif";
     birdImg.onload = function () {
         context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     };
@@ -193,9 +194,11 @@ function update() {
     context.fillText("High Score: " + highScore, 5, 90);
 
     if (gameOver) {
-        // Play death sound only if enabled
+        // Play appropriate sound based on toggle
         if (playDeathSound) {
             deathSound.play();
+        } else {
+            alternativeSound.play(); // Play sfx_die.wav if death sound is off
         }
 
         if (score > highScore) {
