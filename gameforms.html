@@ -3,82 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Request Form</title>
+    <title>Embedded Form</title>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-
-        .form-container {
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        input, textarea {
+        iframe {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
+
+            height: 100vh;
+
             border: none;
-            border-radius: 5px;
-            background: #222;
-            color: #fff;
-        }
-
-        textarea {
-            resize: none;
-            height: 100px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            background: #ff4c4c;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #ff1f1f;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <form action="https://api.form-data.com/f/NBrIefbA3gUzhh" method="POST">
-            <label>Your Email:
-                <input type="email" name="email" required>
-            </label>
-            <label>User's name:
-                <input type="name" name="name" required>
-            </label>
-            <label>What would you like to be fixed or added:
-                <textarea name="message" required></textarea>
-            </label>
-            <button type="submit">Send</button>
-        </form>
-    </div>
 
-</body>
+
+    <iframe src="https://app.formbricks.com/s/kzr447colzv6bc1flzrxn3ks" allowfullscreen></iframe>
+
+
+
 </html>
