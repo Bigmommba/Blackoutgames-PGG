@@ -47,8 +47,9 @@ let pipeSpawnRate = 1200; // Initial spawn rate in ms
 let minPipeSpawnRate = 400; // Minimum spawn interval
 let pipeSpawnDecay = 10; // How much time decreases per spawn
 
-// Sound effect
+// Sound effects
 let deathSound = new Audio("./death.wav");
+let alternativeSound = new Audio("./sfx_hit.wav"); // Use sfx_die.wav as the alternative sound
 let playDeathSound = false; // Default: Do not play sound
 
 // New paused flag
@@ -61,7 +62,7 @@ window.onload = function () {
     context = board.getContext("2d");
 
     birdImg = new Image();
-    birdImg.src = "./flappybird.png";
+    birdImg.src = "./flappybird.gif";
     birdImg.onload = function () {
         context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     };
@@ -99,50 +100,44 @@ function showStartMenu() {
     context.fillText("Press SPACE or UP ARROW to Start", boardWidth / 4, boardHeight / 2);
     context.fillText("High Score: " + highScore, boardWidth / 4, boardHeight / 1.5);
 
-    // Create play sound toggle button at the bottom
-    let button = document.createElement("button");
-    button.textContent = "Enable Risky Death Sound";
-    button.style.position = "absolute";
-    button.style.bottom = "20px";  // Position at the bottom
-    button.style.left = "90%";
-    button.style.transform = "translateX(-50%)"; // Center horizontally
-    button.style.fontSize = "20px";
-    button.style.padding = "12px 25px";
-    button.style.backgroundColor = "#4CAF50"; // Green button
-    button.style.color = "white";
-    button.style.border = "none";
-    button.style.borderRadius = "5px";
-    button.style.cursor = "pointer";
-    button.style.transition = "all 0.3s"; // Smooth transition for hover effect
+    // Create slider for toggling sound
+    let sliderContainer = document.createElement("div");
+    sliderContainer.style.position = "absolute";
+    sliderContainer.style.bottom = "20px";
+    sliderContainer.style.left = "90%";
+    sliderContainer.style.transform = "translateX(-50%)";
+    sliderContainer.style.textAlign = "center";
+    sliderContainer.style.fontSize = "16px";
+    sliderContainer.style.color = "white";
+    sliderContainer.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+    sliderContainer.style.padding = "10px";
+    sliderContainer.style.borderRadius = "8px";
 
-    // Hover effect
-    button.onmouseover = () => {
-        button.style.backgroundColor = "#45a049";
+    let sliderLabel = document.createElement("span");
+    sliderLabel.textContent = "Risky Death Sound: OFF";
+    sliderLabel.style.marginRight = "10px";
+
+    let slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = "0";
+    slider.max = "1";
+    slider.value = playDeathSound ? "1" : "0";
+    slider.style.cursor = "pointer";
+
+    slider.oninput = function () {
+        playDeathSound = this.value === "1";
+        sliderLabel.textContent = "Risky Death Sound: " + (playDeathSound ? "ON" : "OFF");
     };
-    button.onmouseout = () => {
-        button.style.backgroundColor = "#4CAF50";
-    };
 
-    button.onclick = toggleSound;
-    document.body.appendChild(button);
-}
-
-function toggleSound() {
-    playDeathSound = !playDeathSound;
-    if (playDeathSound) {
-        alert("Death sound enabled!");
-    } else {
-        alert("Death sound disabled!");
-    }
-
-    // Remove the button after selection
-    document.querySelector("button").style.display = "none";
+    sliderContainer.appendChild(sliderLabel);
+    sliderContainer.appendChild(slider);
+    document.body.appendChild(sliderContainer);
 }
 
 function startGame(e) {
     if (gameStarted || paused) return;  // If paused, don't start the game
 
-    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyW") {
         gameStarted = true;
         gameOver = false;
         score = 0;
@@ -199,9 +194,11 @@ function update() {
     context.fillText("High Score: " + highScore, 5, 90);
 
     if (gameOver) {
-        // Play death sound only if enabled
+        // Play appropriate sound based on toggle
         if (playDeathSound) {
             deathSound.play();
+        } else {
+            alternativeSound.play(); // Play sfx_die.wav if death sound is off
         }
 
         if (score > highScore) {
@@ -216,6 +213,8 @@ function update() {
         context.fillText("Press SPACE or UP ARROW to Restart", boardWidth / 4, boardHeight / 2);
         context.fillText("Score: " + score, boardWidth / 4, boardHeight / 1.7);
         context.fillText("High Score: " + highScore, boardWidth / 4, boardHeight / 1.5);
+        pipeSpawnRate = 1200;
+        dynamicOpeningSpace = 200;
     }
 }
 
@@ -259,7 +258,7 @@ function spawnPipesWithDecay() {
 }
 
 function moveBird(e) {
-    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyW") {
         velocityY = -6;
 
         if (gameOver) {
